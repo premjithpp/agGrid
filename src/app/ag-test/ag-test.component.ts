@@ -36,7 +36,6 @@ export class AgTestComponent {
         headerName: 'ID',
         maxWidth: 100,
         valueGetter: 'node.id',
-        cellRenderer: 'loadingCellRenderer',
         sortable: false,
         suppressMenu: true,
       },
@@ -84,32 +83,32 @@ export class AgTestComponent {
         suppressMenu: true,
       },
     ];
-    this.defaultColDef = {
-      flex: 1,
-      minWidth: 150,
-      sortable: true,
-      resizable: true,
-    };
-    this.cacheBlockSize=20;
-    this.rowSelection = 'multiple';
-    this.rowModelType = 'infinite';
-    this.paginationPageSize = 100;
-    this.cacheOverflowSize = 2;
-    this.maxConcurrentDatasourceRequests = 2;
-    this.infiniteInitialRowCount = 1;
-    this.maxBlocksInCache = 2;
-    this.getRowNodeId = function(item) {
-      return item.id;
-    };
-    this.components = {
-      loadingCellRenderer: function(params) {
-        if (params.value !== undefined) {
-          return params.value;
-        } else {
-          return '<img src="https://raw.githubusercontent.com/ag-grid/ag-grid/master/grid-packages/ag-grid-docs/src/images/loading.gif">';
-        }
-      },
-    };
+    // this.defaultColDef = {
+    //   flex: 1,
+    //   minWidth: 50,
+    //   sortable: true,
+    //   resizable: true,
+    // };
+    // this.cacheBlockSize=20;
+    // this.rowSelection = 'multiple';
+    // this.rowModelType = 'infinite';
+    // this.paginationPageSize = 100;
+    // this.cacheOverflowSize = 2;
+    // this.maxConcurrentDatasourceRequests = 2;
+    // this.infiniteInitialRowCount = 1;
+    // this.maxBlocksInCache = 2;
+    // this.getRowNodeId = function(item) {
+    //   return item.id;
+    // };
+    // this.components = {
+    //   loadingCellRenderer: function(params) {
+    //     if (params.value !== undefined) {
+    //       return params.value;
+    //     } else {
+    //       return '<img src="https://raw.githubusercontent.com/ag-grid/ag-grid/master/grid-packages/ag-grid-docs/src/images/loading.gif">';
+    //     }
+    //   },
+    // };
   }
 
   onGridReady(params) {
@@ -121,6 +120,8 @@ export class AgTestComponent {
         'https://raw.githubusercontent.com/ag-grid/ag-grid/master/grid-packages/ag-grid-docs/src/olympicWinners.json'
       )
       .subscribe(data => {
+        console.log('inside subscribe');
+        
         data.forEach(function(data, index) {
           data.id = 'R' + (index + 1);
         });
@@ -131,24 +132,26 @@ export class AgTestComponent {
               'asking for ' + params.startRow + ' to ' + params.endRow
             );
             setTimeout(function() {
-              var dataAfterSortingAndFiltering = sortAndFilter(
-                data,
-                params.sortModel,
-                params.filterModel
-              );
-              var rowsThisPage = dataAfterSortingAndFiltering.slice(
-                params.startRow,
-                params.endRow
-              );
+              console.log('inside settimeout', data);
+              this.rowData = data;
+              // var dataAfterSortingAndFiltering = sortAndFilter(
+              //   data,
+              //   params.sortModel,
+              //   params.filterModel
+              // );
+              // var rowsThisPage = dataAfterSortingAndFiltering.slice(
+              //   params.startRow,
+              //   params.endRow
+              // );
               var lastRow = -1;
-              if (dataAfterSortingAndFiltering.length <= params.endRow) {
-                lastRow = dataAfterSortingAndFiltering.length;
-              }
-              params.successCallback(rowsThisPage, lastRow);
+              // if (dataAfterSortingAndFiltering.length <= params.endRow) {
+              //   lastRow = dataAfterSortingAndFiltering.length;
+              // }
+              params.successCallback(data, lastRow);
             }, 500);
           },
         };
-        params.api.setDatasource(dataSource);
+        params.api.setRowData(this.rowData);
       });
   }
 }

@@ -1,6 +1,5 @@
 <ag-grid-angular
-      #agGrid
-      style="width: 100%; height: 100%;"
+      style="width: 700; height: 1700;"
       id="myGrid"
       class="ag-theme-alpine"
       [modules]="modules"
@@ -12,11 +11,7 @@
       [rowModelType]="rowModelType"
       [paginationPageSize]="paginationPageSize"
       [cacheOverflowSize]="cacheOverflowSize"
-      [maxConcurrentDatasourceRequests]="maxConcurrentDatasourceRequests"
-      [infiniteInitialRowCount]="infiniteInitialRowCount"
       [maxBlocksInCache]="maxBlocksInCache"
-      [getRowNodeId]="getRowNodeId"
-      [components]="components"
-      [rowData]="rowData"
       (gridReady)="onGridReady($event)"
-    ></ag-grid-angular>
+      ></ag-grid-angular>
+      <!-- [rowData]="rowData | async" -->
