@@ -73,7 +73,7 @@ export class AppComponent {
         field: 'gold',
         suppressMenu: true,
       },
-      {
+      { 
         field: 'silver',
         suppressMenu: true,
       },
