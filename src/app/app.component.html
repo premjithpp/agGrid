@@ -1,0 +1,39 @@
+<!-- <ag-grid-angular
+      #agGrid
+      style="width: 100%; height: 100%;"
+      id="myGrid"
+      class="ag-theme-alpine"
+ 
+      [columnDefs]="columnDefs"
+  
+   
+      [rowData]="rowData"
+     
+    ></ag-grid-angular> -->
+
+    <ag-grid-angular
+      #agGrid
+      style="width: 100%; height: 400px;"
+      id="myGrid"
+      class="ag-theme-alpine"
+      [modules]="modules"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [components]="components"
+      [rowBuffer]="rowBuffer"
+      [rowSelection]="rowSelection"
+      [rowDeselection]="true"
+      [rowModelType]="rowModelType"
+      [paginationPageSize]="paginationPageSize"
+      [cacheOverflowSize]="cacheOverflowSize"
+      [maxConcurrentDatasourceRequests]="maxConcurrentDatasourceRequests"
+      [infiniteInitialRowCount]="infiniteInitialRowCount"
+      [maxBlocksInCache]="maxBlocksInCache"
+      [rowData]="rowData"
+      [cacheBlockSize]="cacheBlockSize"
+      (gridReady)="onGridReady($event)"
+    ></ag-grid-angular>
+<!-- 
+
+    <app-ag-test></app-ag-test> -->
